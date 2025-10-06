@@ -60,6 +60,12 @@ class AsyncMongoDBConnection:
 
     def __init__(self, logger, connection_string: str, db_name: str) -> None:
         """Inicializa a classe AsyncMongoDBConnection."""
+
+        if not connection_string or not db_name:
+            raise ValueError(
+                'connection_string e db_name não podem ser vazios'
+            )
+
         self.connection_string: str = connection_string
         self.db_name: str = db_name
         self.client: Optional[AsyncIOMotorClient] = None
