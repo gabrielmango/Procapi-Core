@@ -29,6 +29,4 @@ class LoadEnv:
 
     def get_variables(self) -> Dict[str, Optional[str]]:
         """Retorna um dicionário contendo as variáveis de ambiente e seus valores."""
-        return {
-            str(var).lower(): os.getenv(var) for var in self._env_variables
-        }
+        return {str(var).lower(): os.getenv(var) for var in self._env_variables}

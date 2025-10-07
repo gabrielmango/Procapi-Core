@@ -28,9 +28,7 @@ def _get_level_from_env(var_name: str, default: int = logging.INFO) -> int:
 class LoggerManager:
     """Gerencia a criação de logs para um script ou aplicação."""
 
-    def __init__(
-        self, log_name: Optional[str] = None, log_folder: str = 'logs'
-    ) -> None:
+    def __init__(self, log_name: Optional[str] = None, log_folder: str = 'logs') -> None:
         """Inicializa a classe LoggerManager"""
         if log_name is None:
             caller_file = inspect.stack()[1].filename
@@ -39,9 +37,7 @@ class LoggerManager:
         self.log_name: str = log_name
         self.log_folder: str = log_folder
         self.date_folder: str = datetime.now().strftime('%Y_%m_%d')
-        self.log_file: str = (
-            f'{self.log_folder}/{self.date_folder}/{self.log_name}.log'
-        )
+        self.log_file: str = f'{self.log_folder}/{self.date_folder}/{self.log_name}.log'
 
         self.level: int = _get_level_from_env('LOG_LEVEL', logging.INFO)
 
@@ -61,9 +57,7 @@ class LoggerManager:
         logger.propagate = False
 
         if not logger.handlers:
-            formatter = logging.Formatter(
-                '%(asctime)s - %(levelname)s - %(message)s'
-            )
+            formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 
             file_handler = logging.FileHandler(self.log_file, encoding='utf-8')
             file_handler.setLevel(self.level)
@@ -82,9 +76,7 @@ class LoggerManager:
         """Altera o nível de log do logger e de todos os handlers."""
         level = _LEVELS.get(level_name.strip().upper(), None)
         if level is None:
-            self.logger.warning(
-                f"Nível inválido '{level_name}'. Mantendo {logging.getLevelName(self.logger.level)}."
-            )
+            self.logger.warning(f"Nível inválido '{level_name}'. Mantendo {logging.getLevelName(self.logger.level)}.")
             return
 
         self.logger.setLevel(level)

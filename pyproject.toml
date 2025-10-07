@@ -9,4 +9,11 @@ format = "blue . && isort ."
 pre_commit = 'task format && task requirements && task config_git && git status && git add . && git status'
 commit = "git commit -m"
 post_commit = "git push"
-run = "python src/main.py"
+run = "python main.py"
+
+[tool.blue]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+line_length = 120
